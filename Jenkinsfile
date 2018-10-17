@@ -12,7 +12,7 @@ pipeline {
         script{
           def version = readFile("VERSION").trim()
           docker.withRegistry('https://quay.io', 'quay-login'){
-            def image = docker.build("citybaseinc/${env.PROJECT_NAME}:${version}", "--build-arg mix_env=${env.BUILD_ENV} --build-arg hex_key=$HEX_AUTH .")
+            def image = docker.build("citybaseinc/${env.PROJECT_NAME}:${version}")
             image.push("${version}")
             image.push("${env.GIT_BRANCH}")
             image.push("${env.GIT_COMMIT}")
