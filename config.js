@@ -6,7 +6,7 @@ flowiumConfig = {
             URL: "https://api.github.com",
             clientID: "bfa6648e886c4a614145",
             gatekeeperURL: "https://gatekeeper.ops.cityba.se",
-            repository: "CityBase/OpsChecklists",
+            repository: "CityBaseInc/OpsChecklists",
             processPath: "/",
         }
     }
