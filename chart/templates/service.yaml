@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "flowium.fullname" . }}
+  labels:
+    app: {{ include "flowium.name" . }}
+    chart: {{ include "flowium.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name:  flowium_mapping
+      prefix: /
+      host: {{ .Values.ingress.host }}
+      service: {{ include "flowium.fullname" . }}.default
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ include "flowium.name" . }}
+    release: {{ .Release.Name }}
